@@ -1,0 +1,54 @@
+﻿<Window x:Class="SampleDataApp.Views.AddUserWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SampleDataApp.Views"
+        mc:Ignorable="d"
+        Title="Add User" Height="450" Width="800" FontSize="20">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Row="2" Grid.Column="2">
+            <ListBox HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBox Text="{Binding FirstName, FallbackValue=First Name, Mode=OneWayToSource}"/>
+                <TextBox Text="{Binding LastName, FallbackValue=Last Name, Mode=OneWayToSource}"/>
+                <TextBox Text="{Binding StreetName, FallbackValue=Street Name, Mode=OneWayToSource}"/>
+                <TextBox Text="{Binding HouseNumber, FallbackValue=House Number, Mode=OneWayToSource}"/>
+                <TextBox Text="{Binding ApartmentNumber, FallbackValue=Apartment Number (optional), Mode=OneWayToSource}"/>
+                <TextBox Text="{Binding PostalCode, FallbackValue=Postal Code, Mode=OneWayToSource}"/>
+                <TextBox Text="{Binding Town, FallbackValue=Town, Mode=OneWayToSource}"/>
+                <TextBox Text="{Binding PhoneNumber, FallbackValue=Phone Number, Mode=OneWayToSource}"/>
+                <TextBox Text="{Binding Birthday, FallbackValue=Birthday (mm-dd-yyyy), Mode=OneWayToSource}"/>
+            </ListBox>
+        </Grid>
+
+        <Grid Grid.Row="3" Grid.Column="2">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="1" Content="Add" Command="{Binding ExecuteAddUser}"/>
+            <Button Grid.Column="3" Content="Cancel"/>
+        </Grid>
+
+    </Grid>
+</Window>
