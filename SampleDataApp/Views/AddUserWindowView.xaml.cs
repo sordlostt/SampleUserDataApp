@@ -24,6 +24,10 @@ namespace SampleDataApp.Views
         {
             InitializeComponent();
 
+            AddUserWindowViewModel viewModel = new AddUserWindowViewModel();
+            DataContext = viewModel;
+
+            Closing += viewModel.OnWindowClosing;
 
             Messenger.Default.Register<NotificationMessage>(this, m => {
                 if (m.Notification == "Close")
@@ -31,9 +35,6 @@ namespace SampleDataApp.Views
                     this.Close();
                 }
             });
-
-            AddUserWindowViewModel viewModel = new AddUserWindowViewModel();
-            DataContext = viewModel;
         }
     }
 }

@@ -23,20 +23,37 @@
             <ColumnDefinition Width="20"/>
         </Grid.ColumnDefinitions>
 
-        <Grid Grid.Row="2" Grid.Column="2">
-            <ListView HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBox Text="{Binding FirstName, FallbackValue=First Name, Mode=OneWayToSource}"/>
-                <TextBox Text="{Binding LastName, FallbackValue=Last Name, Mode=OneWayToSource}"/>
-                <TextBox Text="{Binding StreetName, FallbackValue=Street Name, Mode=OneWayToSource}"/>
-                <TextBox Text="{Binding HouseNumber, FallbackValue=House Number, Mode=OneWayToSource}"/>
-                <TextBox Text="{Binding ApartmentNumber, FallbackValue=Apartment Number (optional), Mode=OneWayToSource}"/>
-                <TextBox Text="{Binding PostalCode, FallbackValue=Postal Code, Mode=OneWayToSource}"/>
-                <TextBox Text="{Binding Town, FallbackValue=Town, Mode=OneWayToSource}"/>
-                <TextBox Text="{Binding PhoneNumber, FallbackValue=Phone Number, Mode=OneWayToSource}"/>
-                <TextBox Text="{Binding Birthday, FallbackValue=Birthday (mm-dd-yyyy), Mode=OneWayToSource}"/>
+        <Grid Grid.Column="2" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ListView Grid.Column="0" Background="Transparent" BorderThickness="0">
+                <TextBlock Text="First Name:"/>
+                <TextBlock Text="Last Name:"/>
+                <TextBlock Text="Street Name:"/>
+                <TextBlock Text="House Number:"/>
+                <TextBlock Text="Apartment Number:"/>
+                <TextBlock Text="Postal Code:"/>
+                <TextBlock Text="Town:"/>
+                <TextBlock Text="Phone Number:"/>
+                <TextBlock Text="Birthday (mm-dd-yyyy):"/>
+            </ListView>
+
+            <ListView Grid.Column="1" Background="Transparent" BorderThickness="0">
+                <TextBox Width="200" Text="{Binding FirstName, Mode=OneWayToSource}"/>
+                <TextBox Width="200" Text="{Binding LastName, Mode=OneWayToSource}"/>
+                <TextBox Width="200" Text="{Binding StreetName, Mode=OneWayToSource}"/>
+                <TextBox Width="200" Text="{Binding HouseNumber, Mode=OneWayToSource}"/>
+                <TextBox Width="200" Text="{Binding ApartmentNumber, Mode=OneWayToSource}"/>
+                <TextBox Width="200" Text="{Binding PostalCode, Mode=OneWayToSource}"/>
+                <TextBox Width="200" Text="{Binding Town, Mode=OneWayToSource}"/>
+                <TextBox Width="200" Text="{Binding PhoneNumber, Mode=OneWayToSource}"/>
+                <TextBox Width="200" Text="{Binding Birthday, Mode=OneWayToSource}"/>
             </ListView>
         </Grid>
-
+        
         <Grid Grid.Row="3" Grid.Column="2">
             
             <Grid.ColumnDefinitions>
