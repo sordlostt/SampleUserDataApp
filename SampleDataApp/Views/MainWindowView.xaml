@@ -7,7 +7,7 @@
         xmlns:viewmodels="clr-namespace:SampleDataApp.ViewModels"
         xmlns:local="clr-namespace:SampleDataApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="400" Width="800" ScrollViewer.CanContentScroll="True">
     
     <Grid>
     
@@ -32,7 +32,7 @@
             <Button Content="Add User" Command="{Binding ExecuteOpenAddUserWindow}"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
 
-        <DataGrid ItemsSource="{Binding Users, Mode=TwoWay}" Grid.Row="2" Grid.Column="2">
+        <DataGrid AutoGeneratingColumn="OnAutoGeneratingColumn" ItemsSource="{Binding Users, Mode=TwoWay}" Grid.Row="2" Grid.Column="2" HorizontalScrollBarVisibility="Visible">
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Remove User" Command="{Binding ExecuteRemoveUser}"

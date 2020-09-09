@@ -14,20 +14,22 @@ namespace SampleDataApp.ViewModels
     {
         public static ObservableCollection<IUser> Users { get; set; }
 
-        public DelegateCommandExecutor ExecuteOpenAddUserWindow { get; private set; }
+        public OpenAddUserWindowCommand ExecuteOpenAddUserWindow { get; private set; }
         public RemoveUserCommand ExecuteRemoveUser { get; private set; }
 
         public MainWindowViewModel()
         {
-            ExecuteOpenAddUserWindow = new DelegateCommandExecutor(OpenAddUserWindow);
+            ExecuteOpenAddUserWindow = new OpenAddUserWindowCommand(OpenAddUserWindow);
             ExecuteRemoveUser = new RemoveUserCommand(RemoveUser);
             Users = new ObservableCollection<IUser> { };
         }
 
         public void OpenAddUserWindow()
         {
+            //put some abstraction here
             AddUserWindowView addUserWindow = new AddUserWindowView();
             addUserWindow.Show();
+            AddUserWindowViewModel.CanOpen = false;
         }
 
         public void RemoveUser(IUser user)

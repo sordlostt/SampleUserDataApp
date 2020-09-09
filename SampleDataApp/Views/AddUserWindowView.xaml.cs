@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Messaging;
 using SampleDataApp.Models;
 using SampleDataApp.ViewModels;
 
@@ -22,6 +23,14 @@ namespace SampleDataApp.Views
         public AddUserWindowView()
         {
             InitializeComponent();
+
+
+            Messenger.Default.Register<NotificationMessage>(this, m => {
+                if (m.Notification == "Close")
+                {
+                    this.Close();
+                }
+            });
 
             AddUserWindowViewModel viewModel = new AddUserWindowViewModel();
             DataContext = viewModel;
