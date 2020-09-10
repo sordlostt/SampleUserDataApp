@@ -7,7 +7,8 @@
         xmlns:viewmodels="clr-namespace:SampleDataApp.ViewModels"
         xmlns:local="clr-namespace:SampleDataApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="900" ScrollViewer.CanContentScroll="True">
+        Title="MainWindow" Height="600" Width="900" ScrollViewer.CanContentScroll="True"
+        ResizeMode="CanMinimize">
     
     <Grid>
     
@@ -32,7 +33,8 @@
             <Button Content="Add User" Command="{Binding ExecuteOpenAddUserWindow}"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
 
-        <DataGrid AutoGeneratingColumn="OnAutoGeneratingColumn" ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnTargetUpdated=True}" Grid.Row="2" Grid.Column="2" HorizontalScrollBarVisibility="Visible">
+        <DataGrid AutoGeneratingColumn="OnAutoGeneratingColumn" ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnTargetUpdated=True}" 
+                  CanUserAddRows="False" CanUserReorderColumns="false" CanUserResizeRows="False" CanUserResizeColumns="False" Grid.Row="2" Grid.Column="2" HorizontalScrollBarVisibility="Visible">
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>

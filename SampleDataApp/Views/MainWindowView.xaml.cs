@@ -22,7 +22,6 @@ namespace SampleDataApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        MainWindowViewModel viewModel = new MainWindowViewModel();
         public MainWindow()
         {
             InitializeComponent();
@@ -30,6 +29,7 @@ namespace SampleDataApp
             {
                 XMLFileManager.CreateEmptyFile();
             }
+            MainWindowViewModel viewModel = new MainWindowViewModel();
             DataContext = viewModel;
 
         }
