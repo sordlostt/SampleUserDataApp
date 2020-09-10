@@ -10,12 +10,16 @@ using System.Collections.ObjectModel;
 using XMLLogicLibrary;
 using System.Xml.Serialization;
 using SampleDataApp.ViewModels.Misc;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace SampleDataApp.ViewModels
 {
     public class MainWindowViewModel : ObservableObject
     {
         private ObservableCollection<IUser> _users;
+        private bool _areButtonsEnabled = false;
         public ObservableCollection<IUser> Users
         {
             get
@@ -27,6 +31,20 @@ namespace SampleDataApp.ViewModels
             {
                 _users = value;
                 OnPropertyChanged("Users");
+            }
+        }
+        // this is set to true by any action that modifies the data
+        public bool AreButtonsEnabled
+        {
+            get
+            {
+                return _areButtonsEnabled;
+            }
+
+            set
+            {
+                _areButtonsEnabled = value;
+                OnPropertyChanged("AreButtonsEnabled");
             }
         }
 
@@ -43,6 +61,7 @@ namespace SampleDataApp.ViewModels
             ExecuteLoadUsers = new DelegateCommandExecutor(LoadUsers);
             UsersContainer.GetInstance(this);
             LoadUsers();
+            RegisterMessengerNotifications();
         }
 
         public void OpenAddUserWindow()
@@ -53,24 +72,42 @@ namespace SampleDataApp.ViewModels
 
         public void RemoveUser(IUser user)
         {
-            Users.Remove(user);
+            if (Users.Count > 0)
+            {
+                Users.Remove(user);
+                Messenger.Default.Send(new NotificationMessage("EnableButtons"));
+            }
         }
 
         public void SaveUsers()
         {
             XMLDataSerializer.SerializeUsers(new XMLUsers());
             XMLFileManager.SaveFile();
+            Messenger.Default.Send(new NotificationMessage("DisableButtons"));
         }
 
         public void LoadUsers()
         {
             UsersContainer.OverwriteUsers(XMLUsersHandler.ReturnDeserializedUsers());
             Users = new ObservableCollection<IUser>(UsersContainer.GetUsers());
+            Messenger.Default.Send(new NotificationMessage("DisableButtons"));
         }
 
-        public static void UpdateUsers(List<IUser> users)
+        private void RegisterMessengerNotifications()
         {
+            Messenger.Default.Register<NotificationMessage>(this, m =>
+            {
+                if (m.Notification == "EnableButtons")
+                {
+                    AreButtonsEnabled = true;
+                }
 
+                if (m.Notification == "DisableButtons")
+                {
+                    AreButtonsEnabled = false;
+                }
+            });
         }
+
     }
 }

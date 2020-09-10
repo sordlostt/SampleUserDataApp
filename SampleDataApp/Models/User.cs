@@ -1,4 +1,5 @@
-﻿using SampleDataApp.ViewModels;
+﻿using GalaSoft.MvvmLight.Messaging;
+using SampleDataApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
@@ -9,23 +10,119 @@ namespace SampleDataApp.Models
     [DataContract(Name = "User", Namespace = "")]
     public class User : ObservableObject,IUser
     {
+        private string _firstName;
+        private string _lastName;
+        private string _streetName;
+        private string _houseNumber;
+        private string _apartmentNumber;
+        private string _postalCode;
+        private string _town;
+        private string _phoneNumber;
         private DateTime _birthday;
+
         [DataMember]
-        public string FirstName { get; set; }
+        public string FirstName 
+        {
+            get 
+            { 
+                return _firstName; 
+            } 
+            set 
+            { 
+                Messenger.Default.Send(new NotificationMessage("EnableButtons"));
+                _firstName = value; 
+            } 
+        }
         [DataMember]
-        public string LastName { get; set; }
+        public string LastName 
+        { 
+            get 
+            { 
+                return _lastName;
+            } 
+            set 
+            { 
+                Messenger.Default.Send(new NotificationMessage("EnableButtons"));
+                _lastName = value; 
+            }
+        }
         [DataMember]
-        public string StreetName { get; set; }
+        public string StreetName 
+        { 
+            get 
+            { 
+                return _streetName;
+            } 
+            set
+            {
+                Messenger.Default.Send(new NotificationMessage("EnableButtons"));
+                _streetName = value; 
+            }
+        }
         [DataMember]
-        public string HouseNumber { get; set; }
+        public string HouseNumber
+        { 
+            get
+            { 
+                return _houseNumber;
+            } 
+            set 
+            { 
+                Messenger.Default.Send(new NotificationMessage("EnableButtons"));
+                _houseNumber = value;
+            } 
+        }
         [DataMember]
-        public string ApartmentNumber { get; set; }
+        public string ApartmentNumber 
+        { 
+            get 
+            { 
+                return _apartmentNumber;
+            } 
+            set
+            {
+                Messenger.Default.Send(new NotificationMessage("EnableButtons"));
+                _apartmentNumber = value;
+            } 
+        }
         [DataMember]
-        public string PostalCode { get; set; }
+        public string PostalCode
+        {
+            get
+            { 
+                return _postalCode;
+            } 
+            set
+            { 
+                Messenger.Default.Send(new NotificationMessage("EnableButtons"));
+                _postalCode = value;
+            } 
+        }
         [DataMember]
-        public string Town { get; set; }
+        public string Town
+        { 
+            get
+            { 
+                return _town;
+            } 
+            set
+            { 
+                Messenger.Default.Send(new NotificationMessage("EnableButtons"));
+                _town = value;
+            } 
+        }
         [DataMember]
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber {
+            get
+            {
+                return _phoneNumber; 
+            }
+            set 
+            { 
+                Messenger.Default.Send(new NotificationMessage("EnableButtons"));
+                _phoneNumber = value;
+            } 
+        }
         [DataMember]
         public DateTime Birthday
         {
@@ -38,6 +135,7 @@ namespace SampleDataApp.Models
             {
                 _birthday = value;
                 OnPropertyChanged("Age");
+                Messenger.Default.Send(new NotificationMessage("EnableButtons"));
             }
         }
         public int Age 

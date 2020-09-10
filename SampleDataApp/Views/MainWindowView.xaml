@@ -32,7 +32,7 @@
             <Button Content="Add User" Command="{Binding ExecuteOpenAddUserWindow}"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
 
-        <DataGrid AutoGeneratingColumn="OnAutoGeneratingColumn" ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Grid.Row="2" Grid.Column="2" HorizontalScrollBarVisibility="Visible">
+        <DataGrid AutoGeneratingColumn="OnAutoGeneratingColumn" ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=LostFocus, NotifyOnTargetUpdated=True}" Grid.Row="2" Grid.Column="2" HorizontalScrollBarVisibility="Visible">
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
@@ -51,8 +51,8 @@
                 <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Content="Save" Command="{Binding ExecuteSaveUsers}" Grid.Column="0"/>
-            <Button Content="Cancel" Command="{Binding ExecuteLoadUsers}" Grid.Column="2"/>
+            <Button x:Name="SaveButton" Content="Save" Command="{Binding ExecuteSaveUsers}" IsEnabled="{Binding AreButtonsEnabled}" Grid.Column="0"/>
+            <Button x:Name="CancelButton" Content="Cancel" Command="{Binding ExecuteLoadUsers}" IsEnabled="{Binding AreButtonsEnabled}" Grid.Column="2"/>
         </Grid>
     </Grid>
 </Window>
