@@ -29,7 +29,8 @@ namespace SampleDataApp.Views
 
             Closing += viewModel.OnWindowClosing;
 
-            Messenger.Default.Register<NotificationMessage>(this, m => {
+            Messenger.Default.Register<NotificationMessage>(this, m =>
+            {
                 if (m.Notification == "Close")
                 {
                     this.Close();
