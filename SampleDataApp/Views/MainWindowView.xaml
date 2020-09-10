@@ -52,7 +52,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Button Content="Save" Command="{Binding ExecuteSaveUsers}" Grid.Column="0"/>
-            <Button Content="Cancel" Grid.Column="2"/>
+            <Button Content="Cancel" Command="{Binding ExecuteLoadUsers}" Grid.Column="2"/>
         </Grid>
     </Grid>
 </Window>

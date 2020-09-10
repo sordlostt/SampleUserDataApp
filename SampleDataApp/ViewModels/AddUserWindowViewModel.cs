@@ -49,7 +49,7 @@ namespace SampleDataApp.ViewModels
             else
             {
                 IUser newUser = UserFactory.CreateUser(FirstName, LastName, StreetName, HouseNumber, ApartmentNumber, PostalCode, Town, PhoneNumber, DateTime.Parse(Birthday));
-                MainWindowViewModel.Users.Add(newUser);
+                UsersContainer.AddUser(newUser);
                 CloseWindow();
             }
         }

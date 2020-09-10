@@ -12,19 +12,35 @@ using System.Xml.Serialization;
 
 namespace SampleDataApp.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : ObservableObject
     {
-        public static ObservableCollection<IUser> Users { get; set; }
+        private ObservableCollection<IUser> _users;
+        public ObservableCollection<IUser> Users
+        {
+            get
+            {
+                return _users;
+            }
+
+            set
+            {
+                _users = value;
+                OnPropertyChanged("Users");
+            }
+        }
+
         public OpenAddUserWindowCommand ExecuteOpenAddUserWindow { get; private set; }
         public RemoveUserCommand ExecuteRemoveUser { get; private set; }
         public DelegateCommandExecutor ExecuteSaveUsers { get; private set; }
+        public DelegateCommandExecutor ExecuteLoadUsers { get; private set; }
 
         public MainWindowViewModel()
         {
             ExecuteOpenAddUserWindow = new OpenAddUserWindowCommand(OpenAddUserWindow);
             ExecuteRemoveUser = new RemoveUserCommand(RemoveUser);
             ExecuteSaveUsers = new DelegateCommandExecutor(SaveUsers);
-            //Users = new ObservableCollection<IUser> { };
+            ExecuteLoadUsers = new DelegateCommandExecutor(LoadUsers);
+            UsersContainer.GetInstance(this);
             if(!XMLFileManager.LoadFile())
             {
                 XMLFileManager.CreateEmptyFile();
@@ -53,15 +69,13 @@ namespace SampleDataApp.ViewModels
 
         public void LoadUsers()
         {
-            XMLUsers deserializedUsers = XMLDataSerializer.DeserializeUsers(new XMLUsers()) as XMLUsers;
-            if (deserializedUsers.Users == null)
-            {
-                Users = new ObservableCollection<IUser> { };
-            }
-            else
-            {
-                Users = new ObservableCollection<IUser>(deserializedUsers.Users);
-            }
+            UsersContainer.OverwriteUsers(XMLUsersHandler.ReturnDeserializedUsers());
+            Users = new ObservableCollection<IUser>(UsersContainer.GetUsers());
+        }
+
+        public static void UpdateUsers(List<IUser> users)
+        {
+
         }
     }
 }

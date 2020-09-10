@@ -18,13 +18,13 @@ namespace SampleDataApp.Models
 
         public XMLUsers()
         {
-            if (MainWindowViewModel.Users == null)
+            if (UsersContainer.GetUsers() == null)
             {
                 Users = new List<IUser> { };
             }
             else
             {
-                Users = new List<IUser>(MainWindowViewModel.Users);
+                Users = new List<IUser>(UsersContainer.GetUsers());
             }
         }
     }

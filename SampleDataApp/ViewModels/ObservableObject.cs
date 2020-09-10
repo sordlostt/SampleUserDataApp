@@ -18,5 +18,6 @@ namespace SampleDataApp.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
     }
 }
