@@ -7,31 +7,13 @@ using System.Text;
 namespace SampleDataApp.Models
 {
     /// <summary>
-    /// Holds a list of all the users.
+    /// Singleton that allows other classes to modify the main view model Users data without having a direct reference to the view model.
     /// </summary>
     public class UsersContainer
     {
 
         private static UsersContainer _instance;
         private static MainWindowViewModel _mainViewModel;
-        /*public static List<IUser> Users
-        {
-            get
-            {
-                if(_mainViewModel.Users == null)
-                {
-                    return new List<IUser> { };
-                }
-
-                return new List<IUser>(_mainViewModel.Users);
-            }
-
-            set
-            {
-                //workaround to notify the non-static user list in the ViewModel of change
-                _mainViewModel.Users = new ObservableCollection<IUser>(value);
-            }
-        }*/
 
         private UsersContainer(MainWindowViewModel vm)
         {
@@ -44,7 +26,6 @@ namespace SampleDataApp.Models
             {
                 _instance = new UsersContainer(vm);
             }
-
             return _instance;
         }
 
@@ -64,7 +45,6 @@ namespace SampleDataApp.Models
             {
                 return new List<IUser> { };
             }
-
             return new List<IUser>(_mainViewModel.Users);
         }
     }

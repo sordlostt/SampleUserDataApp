@@ -9,6 +9,7 @@ using SampleDataApp.ViewModels.Commands;
 using System.Collections.ObjectModel;
 using XMLLogicLibrary;
 using System.Xml.Serialization;
+using SampleDataApp.ViewModels.Misc;
 
 namespace SampleDataApp.ViewModels
 {
@@ -41,18 +42,12 @@ namespace SampleDataApp.ViewModels
             ExecuteSaveUsers = new DelegateCommandExecutor(SaveUsers);
             ExecuteLoadUsers = new DelegateCommandExecutor(LoadUsers);
             UsersContainer.GetInstance(this);
-            if(!XMLFileManager.LoadFile())
-            {
-                XMLFileManager.CreateEmptyFile();
-            }
             LoadUsers();
         }
 
         public void OpenAddUserWindow()
         {
-            //put some abstraction here
-            AddUserWindowView addUserWindow = new AddUserWindowView();
-            addUserWindow.Show();
+            ViewFactory.CreateAddUserView();
             AddUserWindowViewModel.CanOpen = false;
         }
 

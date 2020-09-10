@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SampleDataApp.ViewModels;
+using XMLLogicLibrary;
 
 namespace SampleDataApp
 {
@@ -24,7 +25,10 @@ namespace SampleDataApp
         public MainWindow()
         {
             InitializeComponent();
-
+            if (!XMLFileManager.LoadFile())
+            {
+                XMLFileManager.CreateEmptyFile();
+            }
             MainWindowViewModel viewModel = new MainWindowViewModel();
             DataContext = viewModel;
 

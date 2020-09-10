@@ -7,7 +7,7 @@ using XMLLogicLibrary;
 namespace SampleDataApp.Models
 {
     /// <summary>
-    /// A class that wraps all the deserializtion work of the ViewModel, so that the VM doesn't have to instantiate concrete types.
+    /// A class that wraps all the deserializtion work of the ViewModel
     /// </summary>
     public static class XMLUsersHandler
     {
