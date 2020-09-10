@@ -1,11 +1,14 @@
-﻿using System;
+﻿using SampleDataApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace SampleDataApp.Models
 {
-    public class User : IUser
+    public class User : ObservableObject,IUser
     {
+        private DateTime _birthday;
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string StreetName { get; set; }
@@ -14,7 +17,19 @@ namespace SampleDataApp.Models
         public string PostalCode { get; set; }
         public string Town { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime Birthday { get; set; }
+        public DateTime Birthday
+        {
+            get
+            {
+                return _birthday;
+            }
+
+            set 
+            {
+                _birthday = value;
+                OnPropertyChanged("Age");
+            }
+        }
         public int Age 
         {
             get

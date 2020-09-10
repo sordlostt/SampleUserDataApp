@@ -32,7 +32,11 @@
             <Button Content="Add User" Command="{Binding ExecuteOpenAddUserWindow}"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         </Grid>
 
-        <DataGrid AutoGeneratingColumn="OnAutoGeneratingColumn" ItemsSource="{Binding Users, Mode=TwoWay}" Grid.Row="2" Grid.Column="2" HorizontalScrollBarVisibility="Visible">
+        <DataGrid AutoGeneratingColumn="OnAutoGeneratingColumn" ItemsSource="{Binding Users, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" Grid.Row="2" Grid.Column="2" HorizontalScrollBarVisibility="Visible">
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+            </DataGrid.Resources>
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="Remove User" Command="{Binding ExecuteRemoveUser}"

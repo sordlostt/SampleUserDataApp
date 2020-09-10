@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace SampleDataApp.ViewModels
 {
-    public class MainWindowViewModel : ObservableObject
+    public class MainWindowViewModel
     {
         public static ObservableCollection<IUser> Users { get; set; }
 

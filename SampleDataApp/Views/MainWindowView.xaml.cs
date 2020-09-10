@@ -31,7 +31,7 @@ namespace SampleDataApp
         }
 
         /// <summary>
-        /// Enforce mm-dd-yyyy date format while autogenerating columns
+        /// Enforce mm-dd-yyyy date format when autogenerating columns
         /// </summary>
         private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {

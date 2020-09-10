@@ -30,11 +30,23 @@
             </Grid.ColumnDefinitions>
 
             <ListView Grid.Column="0" Background="Transparent" BorderThickness="0">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <TextBlock Text="First Name:"/>
                 <TextBlock Text="Last Name:"/>
                 <TextBlock Text="Street Name:"/>
                 <TextBlock Text="House Number:"/>
-                <TextBlock Text="Apartment Number:"/>
+                <TextBlock Text="Apartment Number (optional):"/>
                 <TextBlock Text="Postal Code:"/>
                 <TextBlock Text="Town:"/>
                 <TextBlock Text="Phone Number:"/>
@@ -42,6 +54,18 @@
             </ListView>
 
             <ListView Grid.Column="1" Background="Transparent" BorderThickness="0">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
                 <TextBox Width="200" Text="{Binding FirstName, Mode=OneWayToSource}"/>
                 <TextBox Width="200" Text="{Binding LastName, Mode=OneWayToSource}"/>
                 <TextBox Width="200" Text="{Binding StreetName, Mode=OneWayToSource}"/>

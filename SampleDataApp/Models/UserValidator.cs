@@ -16,16 +16,16 @@ namespace SampleDataApp.Models
             if (DateTime.TryParse(value, out temp))
             {
                 return true;
-            }
-            
+            }          
             return false;
         }
 
         /// <summary>
         /// Check if all requested user properties are filled.
         /// </summary>
-        public static bool ValidateUserProperties(IUser user)
+        public static bool ValidateUserProperties(string firstName, string lastName, string streetName, string  houseNumber, string apartmentNumber, string postalCode, string town, string  phoneNumber)
         {
+            IUser user = UserFactory.CreateUser(firstName, lastName, streetName, houseNumber, apartmentNumber, postalCode, town, phoneNumber, new DateTime());
             foreach (PropertyInfo property in user.GetType().GetProperties())
             {
                 var value = property.GetValue(user);
@@ -34,7 +34,6 @@ namespace SampleDataApp.Models
                     return false;
                 }
             }
-
             return true;
         }
     }

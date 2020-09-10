@@ -1,6 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 using SampleDataApp.Models;
 using SampleDataApp.ViewModels.Commands;
+using SampleDataApp.ViewModels.Misc;
 using SampleDataApp.Views;
 using System;
 using System.Collections.Generic;
@@ -11,7 +12,7 @@ using System.Windows;
 
 namespace SampleDataApp.ViewModels
 {
-    public class AddUserWindowViewModel : ObservableObject
+    public class AddUserWindowViewModel
     {
         public static bool CanOpen { get; set; } = true;
         public string ApartmentNumber { get; set; }
@@ -36,35 +37,20 @@ namespace SampleDataApp.ViewModels
 
         public void AddUser()
         {
+            if (!UserValidator.ValidateUserProperties(FirstName, LastName, StreetName, HouseNumber, ApartmentNumber, PostalCode, Town, PhoneNumber))
+            {
+                MessageBoxFactory.DisplayFormNotFilledMessage();
+            }
+            else
             if(!UserValidator.ValidateBirthday(Birthday))
             {
-                MessageBox.Show("Please fill all requested information correctly.");
+                MessageBoxFactory.DisplayWrongDateFormatMessage();
             }
             else
             {
-                IUser newUser = new User()
-                {
-                    FirstName = this.FirstName,
-                    LastName = this.LastName,
-                    ApartmentNumber = this.ApartmentNumber,
-                    Birthday = DateTime.Parse(Birthday),
-                    HouseNumber = this.HouseNumber,
-                    PhoneNumber = this.PhoneNumber,
-                    PostalCode = this.PostalCode,
-                    StreetName = this.StreetName,
-                    Town = this.Town
-                };
-
-                //Make sure the user filled the form with all requested information
-                if(UserValidator.ValidateUserProperties(newUser))
-                {
-                    MainWindowViewModel.Users.Add(newUser);
-                    CloseWindow();
-                }
-                else
-                {
-                    MessageBox.Show("Please fill all requested information correctly.");
-                }
+                IUser newUser = UserFactory.CreateUser(FirstName, LastName, StreetName, HouseNumber, ApartmentNumber, PostalCode, Town, PhoneNumber, DateTime.Parse(Birthday));
+                MainWindowViewModel.Users.Add(newUser);
+                CloseWindow();
             }
         }
 
