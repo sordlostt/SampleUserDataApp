@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight.Messaging;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -16,7 +17,7 @@ namespace SampleDataApp.Models
             if (DateTime.TryParse(value, out temp))
             {
                 return true;
-            }          
+            }
             return false;
         }
 
@@ -31,6 +32,8 @@ namespace SampleDataApp.Models
                 var value = property.GetValue(user);
                 if (property.PropertyType == typeof(string) && value as string == "" && property.Name != "ApartmentNumber")
                 {
+                    //fixes the Save/Cancel buttons enabling on not all required fields filled
+                    Messenger.Default.Send(new NotificationMessage("DisableButtons"));
                     return false;
                 }
             }

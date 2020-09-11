@@ -9,9 +9,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="900" ScrollViewer.CanContentScroll="True"
         ResizeMode="CanMinimize">
-    
+
     <Grid>
-    
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="auto"/>
